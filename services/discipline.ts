@@ -39,11 +39,10 @@ export const useDiscipline = () => {
   };
 };
 
-
 // helpers
 
 const genrateDisciplineformFieldOptions = (apiResponse: any) => {
-  const { response } = apiResponse;
+  const { response = [] } = apiResponse;
   return response.map(({ title, id }: { title: string; id: string }) => ({
     value: id,
     label: title,
@@ -51,7 +50,7 @@ const genrateDisciplineformFieldOptions = (apiResponse: any) => {
 };
 
 const genrateOtSkillsformFieldOptions = (apiResponse: any) => {
-  const { response } = apiResponse;
+  const { response = [] } = apiResponse;
   return response.map(({ title, id }: { title: string; id: string }) => ({
     key: id,
     title,

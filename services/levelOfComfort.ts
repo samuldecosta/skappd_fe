@@ -7,12 +7,15 @@ export const useLevelOfComfort = () => {
   const [comfortSettingOptions, setComfortSettingOptions] = useState();
   const [patientPopulationOptions, setPatientPopulationOptions] = useState();
   const getLevelOfComfortFormPreferences = async (preference_name: string) => {
+    setIsLoading(true);
     try {
       const { data } = await api.get(
         `v1/preferences?preference_name=${preference_name}`
       );
+      setIsLoading(false);
       return data;
     } catch (e) {
+      setIsLoading(false);
       return Promise.reject(e);
     }
   };
@@ -45,7 +48,7 @@ export const useLevelOfComfort = () => {
 // helpers
 
 const genrateformFieldOptions = (apiResponse: any) => {
-  const { response } = apiResponse;
+  const { response = []} = apiResponse;
   return response.map(({ title, id }: { title: string; id: string }) => ({
     value: id,
     label: title,
